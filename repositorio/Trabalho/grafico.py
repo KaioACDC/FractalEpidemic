@@ -6,7 +6,7 @@ def sistema_e_d(t, y, t_inf, t_rec):
     s, i , r = y
     dsdt = -t_inf * s * i 
     didt = t_inf * s * i - t_rec * i
-    drdt = t_inf * i
+    drdt = t_rec * i
     return [dsdt, didt, drdt]
 
 t_inf = 0.5
@@ -21,15 +21,17 @@ eval_t = np.linspace(delta_t[0], delta_t[1], 1000)
 
 solucao = solve_ivp(sistema_e_d, delta_t, [s0, i0, r0], args=(t_inf, t_rec), eval_t=eval_t)
 
-x = solucao.y[0]
-y = solucao.y[1]
+s = solucao.y[0]
+i = solucao.y[1]
+r = solucao.y[2]
 
-plt.figure(figsize=(8, 8))
-for i in range(len(x)):
-    plt.plot(x[:i], y[:i], 'b-', alpha=0.5, linewidth=0.5)
-
-plt.title("Gráfico")
-plt.xlabel("Suscetíveis")
-plt.ylabel("Infectados")
-plt.grid(True)
+plt.figure(figsize=(10, 6))
+plt.plot(solucao.t, solucao.y[0], label="Suscetíveis", color="blue")
+plt.plot(solucao.t, solucao.y[1], label="Infectados", color="red")
+plt.plot(solucao.t, solucao.y[2], label="Recuperados", color="green")
+plt.title("Dinâmica Temporal")
+plt.xlabel("Tempo")
+plt.ylabel("Fração da população")
+plt.legend()
+plt.grid()
 plt.show()
