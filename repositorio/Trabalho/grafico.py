@@ -7,6 +7,7 @@ def sistema_e_d(t, y, t_inf, t_rec):
     dsdt = -t_inf * s * i 
     didt = t_inf * s * i - t_rec * i
     drdt = t_rec * i
+    dndt = 0
     return [dsdt, didt, drdt]
 
 t_inf = 0.5
