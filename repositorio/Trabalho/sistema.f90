@@ -16,3 +16,7 @@ contains
         dydt(1) = -t_inf * y(1) * y(2)
         dydt(2) = t_inf * y(1) * y(2) - t_rec * y(2)
         dydt(3) = t_rec * y(2)
+    end subroutine sistema
+
+    subroutine kutta_sistema(delta_t, y0, t_inf, t_rec, pt, y_saida, t_saida)
+        
