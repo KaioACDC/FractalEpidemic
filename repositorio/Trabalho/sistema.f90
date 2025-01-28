@@ -13,6 +13,9 @@ contains
         !Parâmetros de saída
         real(8), intent(out) :: dydt(3)
         
+        if (t < 0.0) then
+            print *, "Tempo negativo"
+        end if
 
         dydt(1) = -t_inf * y(1) * y(2)
         dydt(2) = t_inf * y(1) * y(2) - t_rec * y(2)
