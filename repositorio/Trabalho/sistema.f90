@@ -11,7 +11,7 @@ contains
         real(8), intent(in) :: y(3)
         
         !Parâmetros de saída
-        real(8), intent(out) :: dydt
+        real(8), intent(out) :: dydt(3)
         
 
         dydt(1) = -t_inf * y(1) * y(2)
@@ -33,5 +33,9 @@ contains
         real(8), intent(out) :: t_saida(pt)
         real(8), intent(out) :: y_saida(3, pt)
 
-        
+        !Variáveis locais
+        real(8) :: h, t, y(3)
+        real(8) :: k1(3), k2(3), k3(3), k4(3)
+        integer :: i
+
 
