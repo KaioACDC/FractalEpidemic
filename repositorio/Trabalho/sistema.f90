@@ -38,4 +38,27 @@ contains
         real(8) :: k1(3), k2(3), k3(3), k4(3)
         integer :: i
 
+        h = (delta_t(2) - delta_t(1)) / (pt - 1)
 
+        t = delta_t
+        y = y0
+        t_saida(1) = t
+        y_saida(:, 1) = y
+
+        !Para resolver o sistema em todos os passos de tempo
+        do i = 2, pt
+            !Método de Runge-Kutta de 4 ordem
+            call kutta_sistema(t, y, k1, t_inf, t_rec)
+            call kutta_sistema(t + 0.5*h, y + 0.5*h*k1, k2, t_inf, t_rec)
+            call kutta_sistema(t + 0.5*h, y + 0.5*h*k2, k3, t_inf, t_rec)
+            call kutta_sistema(t + h, y + h*k3, k4, t_inf, t_rec)
+
+            y = y + (h/6.0)*(k1 + 2*k2 + 2*k3 + k4)
+            t = t + h
+
+            t_saida(i) = t 
+            y_saida(:, i) = y
+
+        end do
+    end subroutine kutta_sistema
+end module sistema
