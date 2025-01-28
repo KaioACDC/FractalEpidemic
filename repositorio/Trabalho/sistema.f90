@@ -29,5 +29,9 @@ contains
         real(8), intent(in) :: y0(3)
         real(8), intent(in) :: pt
 
+        !Parâmetros de saída
+        real(8), intent(out) :: t_saida(pt)
+        real(8), intent(out) :: y_saida(3, pt)
+
         
 
